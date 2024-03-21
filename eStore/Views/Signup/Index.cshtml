@@ -1,0 +1,114 @@
+﻿@model BusinessObject.Member
+
+@{
+    ViewData["Title"] = "Sign up";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="signup-header">Sign up</h1>
+
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6 signup-container">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Fullname" class="control-label"></label>
+                        <input asp-for="Fullname" class="form-control" required />
+                        <span asp-validation-for="Fullname" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CompanyName" class="control-label"></label>
+                        <input asp-for="CompanyName" class="form-control" required />
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="City" class="control-label"></label>
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Country" class="control-label"></label>
+                        <input asp-for="Country" class="form-control" />
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" type="password" required />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Confirm" class="control-label">Confirm</label>
+                        <input id="Confirm" name="Confirm" class="form-control" type="password" required />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" value="Create" class="btn btn-primary signup-button" />
+            </div>
+        </form>
+
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.Error
+            </div>
+        }
+    </div>
+</div>
+
+<div class="text-center mt-3">
+    <p>Already have an account? <a href="/Login" class="signin-link">Sign in</a></p>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<style>
+    /* Custom styles */
+    body {
+        background-color: #f8f9fa; /* Light gray background */
+    }
+
+    .signup-container {
+        background-color: #fff; /* White container background */
+        border-radius: 8px; /* Rounded corners */
+        padding: 20px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    }
+
+    .signup-header {
+        color: #007bff; /* Blue header text */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .signup-button {
+        background-color: #007bff; /* Blue signup button */
+        border-color: #007bff;
+    }
+
+        .signup-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            border-color: #0056b3;
+        }
+
+    .signin-link {
+        color: #007bff; /* Blue link */
+    }
+</style>
